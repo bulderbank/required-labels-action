@@ -24,8 +24,8 @@ export async function run(): Promise<void> {
       process.exit(0);
     }
 
-    console.log(context);
-    const { pull_request: pullRequest } = context.payload;
+    console.log(context.payload);
+    const { pull_request: pullRequest } = context.payload.client_payload || context.payload;
     if (!pullRequest || !pullRequest.labels) {
       throw new Error('there is no `pull_request.labels` in event data');
     }
